@@ -9,8 +9,148 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <!-- Encoding -->
+        <encoding.type>UTF-8</encoding.type>
+        <project.build.sourceEncoding>${encoding.type}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${encoding.type}</project.reporting.outputEncoding>
+        <file.encoding>${encoding.type}</file.encoding>
+
+        <!-- Java version -->
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+
+        <!-- Dependencies Version -->
+        <selenium.java.version>3.141.59</selenium.java.version>
+        <webdrivermanager.version>5.8.0</webdrivermanager.version>
+
+        <jsoup.version>1.17.2</jsoup.version>
+
+        <junit.jupiter.api.version>5.10.2</junit.jupiter.api.version>
+        <junit.platform.suite.engine.version>1.10.2</junit.platform.suite.engine.version>
+        <asserrtj.core.version>3.25.3</asserrtj.core.version>
+
+
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <allure-junit5.version>2.13.6</allure-junit5.version>
+
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <maven-dependency-plugin.version>2.8</maven-dependency-plugin.version>
+        <allure-maven.version>2.10.0</allure-maven.version>
+
+        <aspectj.version>1.9.7</aspectj.version>
+
+        <browser.name/>
+        <base.url/>
+
+        <testTag/>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.jupiter.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-engine</artifactId>
+            <version>${junit.platform.suite.engine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${asserrtj.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>${allure-junit5.version}</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <base.url>http://otus.ru</base.url>
+                <browser.name>chrome</browser.name>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${encoding.type}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <includes>**/*Test.java</includes>
+                    <argLine>
+                        -Xmx1024m
+                        -Dfile.encoding=${encoding.type}
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        -Dallure.results.directory=${project.build.directory}/reports/allure-results
+                    </argLine>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>in/reqres/listeners/DriverListener</value>
+                        </property>
+                    </properties>
+                    <groups>${testTag}</groups>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven-dependency-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure-maven.version}</version>
+                <configuration>
+                    <reportVersion>${allure-maven.version}</reportVersion>
+                    <resultsDirectory>${project.build.directory}/reports/allure-results</resultsDirectory>
+                    <reportDirectory>${project.build.directory}/reports/allure-reports</reportDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
