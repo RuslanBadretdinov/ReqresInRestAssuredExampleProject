@@ -1,4 +1,4 @@
-package in.reqres.factory.annotations;
+package in.reqres.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

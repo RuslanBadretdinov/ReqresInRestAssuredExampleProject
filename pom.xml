@@ -28,6 +28,7 @@
 
         <junit.jupiter.api.version>5.10.2</junit.jupiter.api.version>
         <junit.platform.suite.engine.version>1.10.2</junit.platform.suite.engine.version>
+
         <asserrtj.core.version>3.25.3</asserrtj.core.version>
 
 
@@ -40,8 +41,12 @@
 
         <aspectj.version>1.9.7</aspectj.version>
 
+        <forkCount>1</forkCount>
+        <reuseForks>true</reuseForks>
+
         <browser.name/>
-        <base.url/>
+        <base.web.url/>
+        <base.api.url/>
 
         <testTag/>
     </properties>
@@ -86,9 +91,10 @@
 
     <profiles>
         <profile>
-            <id>prod</id>
+            <id>dev</id>
             <properties>
-                <base.url>http://otus.ru</base.url>
+                <base.web.url>https://reqres.in/</base.web.url>
+                <base.api.url>https://reqres.in/api</base.api.url>
                 <browser.name>chrome</browser.name>
             </properties>
         </profile>
@@ -111,6 +117,15 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
+                    <forkCount>${forkCount}</forkCount>
+                    <reuseForks>${reuseForks}</reuseForks>
+
+                    <systemPropertyVariables>
+                        <base.web.url>${base.web.url}</base.web.url>
+                        <base.api.url>${base.api.url}</base.api.url>
+                        <browser.name>${browser.name}</browser.name>
+                    </systemPropertyVariables>
+
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>**/*Test.java</includes>
                     <argLine>
@@ -122,7 +137,7 @@
                     <properties>
                         <property>
                             <name>listener</name>
-                            <value>in/reqres/listeners/DriverListener</value>
+                            <value>in/reqres/listeners/AllureListener</value>
                         </property>
                     </properties>
                     <groups>${testTag}</groups>
@@ -152,5 +167,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

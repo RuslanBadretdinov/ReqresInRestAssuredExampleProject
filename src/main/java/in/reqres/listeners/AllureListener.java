@@ -1,9 +1,10 @@
 package in.reqres.listeners;
 
+import io.qameta.allure.junit5.AllureJunit5;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
-public class DriverListener implements WebDriverEventListener {
+public class AllureListener extends AllureJunit5 implements WebDriverEventListener {
 
     @Override
     public void beforeAlertAccept(WebDriver webDriver) {
