@@ -30,14 +30,18 @@
         <junit.platform.suite.engine.version>1.10.2</junit.platform.suite.engine.version>
 
         <asserrtj.core.version>3.25.3</asserrtj.core.version>
+        <lombok.version>1.18.12</lombok.version>
 
+        <rest.assured.version>5.4.0</rest.assured.version>
+        <json.schema.validator.version>5.4.0</json.schema.validator.version>
+        <jackson.mapper.asl>1.9.13</jackson.mapper.asl>
 
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <allure-junit5.version>2.13.6</allure-junit5.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <allure.junit5.version>2.13.6</allure.junit5.version>
 
-        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-        <maven-dependency-plugin.version>2.8</maven-dependency-plugin.version>
-        <allure-maven.version>2.10.0</allure-maven.version>
+        <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
+        <maven.dependency.plugin.version>2.8</maven.dependency.plugin.version>
+        <allure.maven.version>2.10.0</allure.maven.version>
 
         <aspectj.version>1.9.7</aspectj.version>
 
@@ -83,9 +87,31 @@
             <version>${asserrtj.core.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
-            <version>${allure-junit5.version}</version>
+            <version>${allure.junit5.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest.assured.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>${json.schema.validator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${jackson.mapper.asl}</version>
         </dependency>
     </dependencies>
 
@@ -105,7 +131,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -115,7 +141,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
+                <version>${maven.surefire.plugin.version}</version>
                 <configuration>
                     <forkCount>${forkCount}</forkCount>
                     <reuseForks>${reuseForks}</reuseForks>
@@ -153,14 +179,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>${maven-dependency-plugin.version}</version>
+                <version>${maven.dependency.plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>${allure-maven.version}</version>
+                <version>${allure.maven.version}</version>
                 <configuration>
-                    <reportVersion>${allure-maven.version}</reportVersion>
+                    <reportVersion>${allure.maven.version}</reportVersion>
                     <resultsDirectory>${project.build.directory}/reports/allure-results</resultsDirectory>
                     <reportDirectory>${project.build.directory}/reports/allure-reports</reportDirectory>
                 </configuration>
