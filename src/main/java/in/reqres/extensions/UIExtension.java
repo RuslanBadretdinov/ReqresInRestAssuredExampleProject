@@ -1,4 +1,4 @@
-package in.reqres.factory.extensions;
+package in.reqres.extensions;
 
 import in.reqres.annotations.Driver;
 import in.reqres.annotations.Page;
