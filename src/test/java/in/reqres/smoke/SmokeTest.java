@@ -1,7 +1,7 @@
 package in.reqres.smoke;
 
 import in.reqres.contents.pages.MainPage;
-import in.reqres.factory.extensions.UIExtension;
+import in.reqres.extensions.UIExtension;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @DisplayName("Смок тест открытия главной страницы")
 public class SmokeTest {
 
-    MainPage mainPage;
+    private MainPage mainPage;
 
     @Test
     @Tag("@smoke")
