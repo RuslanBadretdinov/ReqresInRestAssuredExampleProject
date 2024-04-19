@@ -8,12 +8,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class UserDTO {
-    private DataDTO data;
-    private SupportDTO support;
+public class ListUsersDTO {
+    private List<DataDTO> data;
+    private Long page;
+    private Long perPage;
+    private SupportDTO supportDTO;
+    private Long total;
+    private Long totalPages;
 }

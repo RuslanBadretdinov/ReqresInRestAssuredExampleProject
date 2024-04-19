@@ -1,7 +1,7 @@
 package api.in.reqres.example;
 
 import api.in.reqres.dto.authorization.AccountDTO;
-import api.in.reqres.dto.authorization.ErrorResponseDTO;
+import api.in.reqres.dto.authorization.UnSuccessRegisterRespDTO;
 import api.in.reqres.services.RegisterServiceApi;
 import com.github.javafaker.Faker;
 import in.reqres.extensions.UIExtension;
@@ -39,7 +39,7 @@ public class ExampleApiTest {
 
 
 
-        ValidatableResponse registerUserResponse = registerServiceApi.registerUser(accountDTO);
+        ValidatableResponse registerUserResponse = registerServiceApi.registerAccount(accountDTO);
 
         Allure.step("тело ответа запроса 'POST'+'/register'", () -> {
             addAttachment(registerUserResponse.extract().body().asString());
@@ -81,14 +81,14 @@ public class ExampleApiTest {
         assertEqualsWithAllureStep("Вар №1 - body 'POST' запроса '/register'",
                 expectedError, actualError);
 
-        ErrorResponseDTO actualErrorResponseDTO = registerUserResponse.extract().body().as(ErrorResponseDTO.class);
+        UnSuccessRegisterRespDTO actualUnSuccessRegisterRespDTO = registerUserResponse.extract().body().as(UnSuccessRegisterRespDTO.class);
 
 //        Allure.step("вар №2 - body 'POST' запроса '/register'", () -> {
 //            // Вариант получения объекта DTO (ErrorResponseDTO) из запроса
 //            assertEquals(expectedError, actualErrorResponseDTO.getError());
 //        });
         assertEqualsWithAllureStep("Вар №2 - body 'POST' запроса '/register'",
-                expectedError, actualErrorResponseDTO.getError());
+                expectedError, actualUnSuccessRegisterRespDTO.getError());
 
 //        Allure.step("Валидация по JSON схеме ответа 'POST' запроса '/register'", () -> {
 //            // Валидация по JSON схеме

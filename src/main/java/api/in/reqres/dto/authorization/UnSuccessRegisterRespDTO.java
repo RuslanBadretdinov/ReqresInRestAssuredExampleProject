@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class ErrorResponseDTO {
+public class UnSuccessRegisterRespDTO {
     private String error;
 }
