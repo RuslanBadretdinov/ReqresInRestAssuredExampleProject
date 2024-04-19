@@ -39,6 +39,7 @@
 
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <allure.junit5.version>2.13.6</allure.junit5.version>
+        <allure.rest.assured.version>2.13.6</allure.rest.assured.version>
 
         <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
         <maven.dependency.plugin.version>2.8</maven.dependency.plugin.version>
@@ -103,6 +104,11 @@
             <artifactId>allure-junit5</artifactId>
             <version>${allure.junit5.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-rest-assured</artifactId>
+            <version>${allure.rest.assured.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -166,12 +172,12 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                         -Dallure.results.directory=${project.build.directory}/reports/allure-results
                     </argLine>
-                    <properties>
-                        <property>
-                            <name>listener</name>
-                            <value>in/reqres/listeners/AllureListener</value>
-                        </property>
-                    </properties>
+<!--                    <properties>-->
+<!--                        <property>-->
+<!--                            <name>listener</name>-->
+<!--                            <value>in/reqres/listeners/AllureListener</value>-->
+<!--                        </property>-->
+<!--                    </properties>-->
                     <groups>${testTag}</groups>
                 </configuration>
                 <dependencies>
