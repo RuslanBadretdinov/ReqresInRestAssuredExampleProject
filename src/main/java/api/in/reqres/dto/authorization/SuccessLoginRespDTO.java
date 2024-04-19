@@ -5,5 +5,5 @@ import lombok.Data;
 
 @Data
 public class SuccessLoginRespDTO {
-    private String mToken;
+    private String token;
 }

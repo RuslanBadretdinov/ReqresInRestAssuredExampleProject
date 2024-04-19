@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class UserReqFormDTO {
+public class UserFormReqDTO {
 
     private String job;
     private String name;

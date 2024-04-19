@@ -17,6 +17,11 @@ public class AllureUtils {
         return ob;
     }
 
+    public static void addAttachment(String name, String attachedText) {
+        Allure.addAttachment(name, "application/json",
+                attachedText);
+    }
+
     public static void assertEqualsWithAllureStep(String name, Object expectedValue, Object actualValue) {
         Allure.step(name, () -> {
             Allure.step("№1 - expected value, №2 - actual value");
@@ -27,7 +32,7 @@ public class AllureUtils {
     public static void assertValidateJSONAllureStep(ValidatableResponse response, String validateJsonPath) {
         Allure.step(String.format("Валидация по JSON схеме ответа '%s'", response.extract().contentType()), () -> {
             Allure.step(String.format("путь к JSON файлу : '%s'", validateJsonPath));
-            response.body(matchesJsonSchemaInClasspath("api.in.reqres/jsonvalidation/RegisterError.json"));
+            response.body(matchesJsonSchemaInClasspath(validateJsonPath));
         });
     }
 }

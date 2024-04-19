@@ -5,5 +5,5 @@ import lombok.Data;
 
 @Data
 public class UnSuccessLoginRespDTO {
-    private String mError;
+    private String error;
 }

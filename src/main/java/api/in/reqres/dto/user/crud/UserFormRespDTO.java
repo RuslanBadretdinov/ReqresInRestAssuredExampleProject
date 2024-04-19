@@ -8,8 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"id"})
-public class RespUserFormDTO {
-
+public class UserFormRespDTO {
     private String createdAt;
     private String id;
     private String job;
