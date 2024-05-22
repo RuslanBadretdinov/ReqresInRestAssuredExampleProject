@@ -28,8 +28,38 @@ public class UsersTest {
 
     @Test
     @Tag("@users")
-    @DisplayName("Регистрация аккаунта с неправильными данными")
+    @DisplayName("Создание пользователя")
     public void createNewUser() {
+        UserFormReqDTO userFormReqDTO = UserFormReqDTO.builder()
+                .name(faker.name().firstName())
+                .job(faker.job().position())
+                .build();
+
+        addAttachment("DTO для 'POST:/users'", userFormReqDTO.toString());
+
+        ValidatableResponse createUserResp = usersServiceApi.createUser(userFormReqDTO);
+
+        Allure.step("статус запроса 'POST:/users' == 201", () -> {
+            createUserResp.statusCode(addAttachment(201));
+        });
+
+        assertValidateJSONAllureStep(createUserResp, "api.in.reqres/jsonvalidation/UserFormResp.json");
+
+        Allure.step("Сравнение полей - body 'POST:/register'", () -> {
+            assertAll(
+                    "Group assertions - soft assertions",
+                    () -> createUserResp.body("name", equalTo(userFormReqDTO.getName())),
+                    () -> createUserResp.body("job", equalTo(userFormReqDTO.getJob())),
+                    () -> assertNotNull(createUserResp.extract().body().as(UserFormRespDTO.class).getId()),
+                    () -> assertNotNull(createUserResp.extract().body().as(UserFormRespDTO.class).getCreatedAt())
+            );
+        });
+    }
+
+    @Test
+    @Tag("@users2")
+    @DisplayName("Изменение и удаление пользователя")
+    public void putPatchDeleteUser() {
         UserFormReqDTO userFormReqDTO = UserFormReqDTO.builder()
                 .name(faker.name().firstName())
                 .job(faker.job().position())

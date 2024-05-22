@@ -23,11 +23,11 @@ public class UIExtension implements BeforeEachCallback, AfterEachCallback, After
 
     @Override
     public void beforeEach(ExtensionContext extensionContext) throws Exception {
-//        EventFiringWebDriver eventFiringWebDriver = new DriverFactory().create();
-//        eventFiringWebDriver.register(new AllureListener());
-//        this.driver = eventFiringWebDriver.getWrappedDriver();
-//        assignDriverVars(extensionContext, this.driver);
-//        assignPageVars(extensionContext, this.driver);
+        EventFiringWebDriver eventFiringWebDriver = new DriverFactory().create();
+        eventFiringWebDriver.register(new AllureListener());
+        this.driver = eventFiringWebDriver.getWrappedDriver();
+        assignDriverVars(extensionContext, this.driver);
+        assignPageVars(extensionContext, this.driver);
     }
 
     @Override
