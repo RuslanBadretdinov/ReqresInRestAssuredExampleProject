@@ -172,12 +172,12 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                         -Dallure.results.directory=${project.build.directory}/reports/allure-results
                     </argLine>
-<!--                    <properties>-->
-<!--                        <property>-->
-<!--                            <name>listener</name>-->
-<!--                            <value>in/reqres/listeners/AllureListener</value>-->
-<!--                        </property>-->
-<!--                    </properties>-->
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>in/reqres/listeners/AllureListener</value>
+                        </property>
+                    </properties>
                     <groups>${testTag}</groups>
                 </configuration>
                 <dependencies>

@@ -16,7 +16,7 @@ public class DriverFactory {
     public EventFiringWebDriver create() {
         switch (browserName.toLowerCase(Locale.ROOT)) {
             case "chrome": {
-                WebDriverManager.chromiumdriver().setup();
+                WebDriverManager.chromiumdriver().browserVersion("125.0").setup();
                 IDriver<ChromeOptions> chromeOptions = new InitChromeOptions();
                 return new EventFiringWebDriver(new ChromeDriver(chromeOptions.getInitOptions()));
             }
